@@ -80,5 +80,9 @@ frameworks:
       version: v1.1.0
       type: app_store
       name: tk-framework-lmv
-
+  tk-framework-pythonconsole_v1.x.x:
+    location:
+      name: tk-framework-pythonconsole
+      type: app_store
+      version: v1.4.0
 include: unreal/frameworks.yml
