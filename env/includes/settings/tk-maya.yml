@@ -29,6 +29,10 @@ includes:
 common.frameworks:
   - tk-framework-pythonconsole_v1.x.x
 
+common.apps:
+  tk-multi-pythonconsole:
+    location: "@apps.tk-multi-pythonconsole.location"
+    
 ################################################################################
 # asset
 settings.tk-maya.asset:
@@ -38,10 +42,12 @@ settings.tk-maya.asset:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
+    tk-multi-pythonconsole: "@common.apps.tk-multi-pythonconsole"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   debug_logging: false
   location: "@engines.tk-maya.location"
+  frameworks: "@common.frameworks"
 
 # asset_step
 settings.tk-maya.asset_step:
@@ -59,6 +65,7 @@ settings.tk-maya.asset_step:
     tk-multi-snapshot: "@settings.tk-multi-snapshot.maya.asset_step"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.maya.asset_step"
     tk-multi-reviewsubmission: "@settings.tk-multi-reviewsubmission.maya"
+    tk-multi-pythonconsole: "@common.apps.tk-multi-pythonconsole"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   - {app_instance: tk-multi-snapshot, name: Snapshot...}
@@ -67,6 +74,7 @@ settings.tk-maya.asset_step:
   - {app_instance: tk-multi-breakdown2, name: Scene Breakdown...}
   template_project: asset_work_area_maya
   location: "@engines.tk-maya.location"
+  frameworks: "@common.frameworks"
 
 # project
 settings.tk-maya.project:
@@ -76,9 +84,11 @@ settings.tk-maya.project:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
+    tk-multi-pythonconsole: "@common.apps.tk-multi-pythonconsole"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   location: "@engines.tk-maya.location"
+  frameworks: "@common.frameworks"
 
 # sequence
 settings.tk-maya.sequence:
@@ -88,9 +98,11 @@ settings.tk-maya.sequence:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
+    tk-multi-pythonconsole: "@common.apps.tk-multi-pythonconsole"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   location: "@engines.tk-maya.location"
+  frameworks: "@common.frameworks"
 
 # shot
 settings.tk-maya.shot:
@@ -100,9 +112,11 @@ settings.tk-maya.shot:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
+    tk-multi-pythonconsole: "@common.apps.tk-multi-pythonconsole"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   location: "@engines.tk-maya.location"
+  frameworks: "@common.frameworks"
 
 # shot_step
 settings.tk-maya.shot_step:
@@ -122,6 +136,7 @@ settings.tk-maya.shot_step:
     tk-multi-snapshot: "@settings.tk-multi-snapshot.maya.shot_step"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.maya.shot_step"
     tk-multi-reviewsubmission: "@settings.tk-multi-reviewsubmission.maya"
+    tk-multi-pythonconsole: "@common.apps.tk-multi-pythonconsole"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   - {app_instance: tk-multi-snapshot, name: Snapshot...}
@@ -130,3 +145,4 @@ settings.tk-maya.shot_step:
   - {app_instance: tk-multi-breakdown2, name: Scene Breakdown...}
   template_project: shot_work_area_maya
   location: "@engines.tk-maya.location"
+  frameworks: "@common.frameworks"
