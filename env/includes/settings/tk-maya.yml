@@ -25,9 +25,6 @@ includes:
 - ../unreal/settings/tk-multi-publish2.yml
 
 ################################################################################
-
-common.frameworks:
-  - tk-framework-pythonconsole_v1.x.x
     
 ################################################################################
 # asset
@@ -44,8 +41,12 @@ settings.tk-maya.asset:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   debug_logging: false
   location: "@engines.tk-maya.location"
-  frameworks: "@common.frameworks"
-
+  frameworks:
+    tk-framework-pythonconsole_v1.x.x:
+      location:
+        type: app_store
+        name: tk-framework-pythonconsole
+        version: v1.4.0
 # asset_step
 settings.tk-maya.asset_step:
   apps:
@@ -72,7 +73,12 @@ settings.tk-maya.asset_step:
   - {app_instance: tk-multi-breakdown2, name: Scene Breakdown...}
   template_project: asset_work_area_maya
   location: "@engines.tk-maya.location"
-  frameworks: "@common.frameworks"
+  frameworks:
+    tk-framework-pythonconsole_v1.x.x:
+      location:
+        type: app_store
+        name: tk-framework-pythonconsole
+        version: v1.4.0
 
 # project
 settings.tk-maya.project:
@@ -87,7 +93,12 @@ settings.tk-maya.project:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   location: "@engines.tk-maya.location"
-  frameworks: "@common.frameworks"
+  frameworks:
+    tk-framework-pythonconsole_v1.x.x:
+      location:
+        type: app_store
+        name: tk-framework-pythonconsole
+        version: v1.4.0
 
 # sequence
 settings.tk-maya.sequence:
@@ -102,7 +113,12 @@ settings.tk-maya.sequence:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   location: "@engines.tk-maya.location"
-  frameworks: "@common.frameworks"
+  frameworks:
+    tk-framework-pythonconsole_v1.x.x:
+      location:
+        type: app_store
+        name: tk-framework-pythonconsole
+        version: v1.4.0
 
 # shot
 settings.tk-maya.shot:
@@ -117,7 +133,12 @@ settings.tk-maya.shot:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
   location: "@engines.tk-maya.location"
-  frameworks: "@common.frameworks"
+  frameworks:
+    tk-framework-pythonconsole_v1.x.x:
+      location:
+        type: app_store
+        name: tk-framework-pythonconsole
+        version: v1.4.0
 
 # shot_step
 settings.tk-maya.shot_step:
@@ -147,4 +168,9 @@ settings.tk-maya.shot_step:
   - {app_instance: tk-multi-breakdown2, name: Scene Breakdown...}
   template_project: shot_work_area_maya
   location: "@engines.tk-maya.location"
-  frameworks: "@common.frameworks"
+  frameworks:
+    tk-framework-pythonconsole_v1.x.x:
+      location:
+        type: app_store
+        name: tk-framework-pythonconsole
+        version: v1.4.0
