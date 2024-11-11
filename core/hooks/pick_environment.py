@@ -12,6 +12,7 @@
 Hook which chooses an environment file to use based on the current context.
 """
 import os
+import sys
 from tank import Hook
 
 
