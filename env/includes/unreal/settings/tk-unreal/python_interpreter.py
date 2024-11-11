@@ -8,24 +8,35 @@ class PythonInterpreter(sgtk.hook.Hook):
     """    
     def execute(self, **kwargs):
         """
-        Return the path to Python 3.7 interpreter from Miniconda3
+        Return the path to Python 3.7 interpreter and append to sys.path
         
         :returns: Path to Python interpreter
         :rtype: str
         """
-        # Miniconda3 Python 3.7 env path
-        if sys.platform == "win32":
-            python_path = r"C:\Users\lee\miniconda3\envs\py37\python.exe"
-            
-            # Try alternate path if not found
-            if not os.path.exists(python_path):
-                python_path = os.path.expanduser("~/miniconda3/envs/py37/python.exe")
+        # Miniconda3 Python 경로들
+        python_paths = [
+            r"C:\Users\lee\miniconda3\envs\py37",  # Python 실행 파일 폴더
+            r"C:\Users\lee\miniconda3\envs\py37\Lib\site-packages",  # 사이트 패키지
+            r"C:\Users\lee\miniconda3\envs\py37\Lib",  # 표준 라이브러리
+            r"C:\Users\lee\miniconda3\envs\py37\DLLs"  # DLL 파일들
+        ]
         
-        # Check if Python exists
-        if not os.path.exists(python_path):
+        # sys.path에 경로 추가
+        for path in python_paths:
+            if os.path.exists(path) and path not in sys.path:
+                sys.path.append(path)
+                self.logger.info(f"Added to sys.path: {path}")
+        
+        # Python 실행 파일 경로 반환
+        python_exe = os.path.join(python_paths[0], "python.exe")
+        
+        if not os.path.exists(python_exe):
             self.logger.warning(
-                "Python 3.7 interpreter '%s' does not exist!" % python_path
+                f"Python interpreter not found at: {python_exe}"
             )
             return None
             
-        return python_path
+        self.logger.info(f"Using Python interpreter: {python_exe}")
+        self.logger.info(f"Updated sys.path: {sys.path}")
+            
+        return python_exe
