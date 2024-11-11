@@ -16,11 +16,22 @@ from tank import Hook
 
 
 class PickEnvironment(Hook):
+    def init_fbx(self):
+        """FBX SDK 초기화"""
+
+        # Conda 경로 추가
+        conda_path = r"C:\Users\lee\miniconda3\envs\fbx_env\Lib\site-packages"
+        if os.path.exists(conda_path) and conda_path not in sys.path:
+            sys.path.append(conda_path)
+            print("[Startup] Added Conda path")
+
     def execute(self, context, **kwargs):
         """
         The default implementation assumes there are three environments, called shot, asset
         and project, and switches to these based on entity type.
         """
+        # FBX SDK 초기화
+        self.init_fbx()
         if context.source_entity:
             if context.source_entity["type"] == "Version":
                 return "version"
