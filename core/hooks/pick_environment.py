@@ -18,7 +18,6 @@ from tank import Hook
 
 class PickEnvironment(Hook):
     def init_fbx(self):
-        """FBX SDK 초기화"""
 
         # Conda 경로 추가
         conda_path = r"C:\Users\lee\miniconda3\envs\fbx_env\Lib\site-packages"
