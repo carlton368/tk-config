@@ -19,7 +19,7 @@ from tank import Hook
 class PickEnvironment(Hook):
     def init_fbx(self):
 
-        # Conda 경로 추가
+        # Conda 경로 추가(파이썬 3.7버전에서 사용가능한 FBX SDK 경로)
         conda_path = r"C:\Users\lee\miniconda3\envs\fbx_env\Lib\site-packages"
         if os.path.exists(conda_path) and conda_path not in sys.path:
             sys.path.append(conda_path)
@@ -30,8 +30,8 @@ class PickEnvironment(Hook):
         The default implementation assumes there are three environments, called shot, asset
         and project, and switches to these based on entity type.
         """
-        # FBX SDK 초기화
-        self.init_fbx()
+        # FBX SDK 경로 추가하는 함수
+        # self.init_fbx()
         if context.source_entity:
             if context.source_entity["type"] == "Version":
                 return "version"
