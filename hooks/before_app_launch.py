@@ -30,13 +30,12 @@ class BeforeAppLaunch(HookBaseClass):
             # 환경 변수 업데이트
             os.environ['PYTHONPATH'] = os.pathsep.join(current_pythonpath)
             os.environ['UE_PYTHONPATH'] = os.environ['PYTHONPATH']
-            os.environ['WONJIN_BEFORE_LAUNCH'] = '1234'
+            os.environ['WONJIN_BEFORE_LAUNCH2'] = '1234'
 
             # 로깅
             self.parent.log_debug("Updated Python paths:")
             self.parent.log_debug("PYTHONPATH: %s" % os.environ['PYTHONPATH'])
             self.parent.log_debug("UE_PYTHONPATH: %s" % os.environ['UE_PYTHONPATH'])
-            self.parent.log_debug("WONJIN_BEFORE_LAUNCH: %s" % os.environ['WONJIN_BEFORE_LAUNCH'])
             self.parent.log_debug("sys.path: %s" % sys.path)
 
         # 상위 클래스의 execute 실행
