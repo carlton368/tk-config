@@ -23,10 +23,10 @@ import tank
 
 
 ENGINES = {
-    'tk-houdini': 'houdini',
-    'tk-maya': 'maya',
-    'tk-nuke': 'nuke',
-    'tk-nukestudio': 'nuke',
+    'tk-houdini' : 'houdini',
+    'tk-maya' : 'maya',
+    'tk-nuke' : 'nuke',
+    'tk-nukestudio' : 'nuke',
     'tk-mari' : 'mari',
     'tk-clarisse' : 'clarisse',
     'tk-unreal' : 'unreal'
@@ -71,88 +71,69 @@ class AppLaunch(tank.Hook):
         if (depart['name'] == 'RND' and engine_name == 'tk-nuke') or depart['name'] in ['General']:
             depart_confirm = True
 
+
+        if sys.version_info.major == 3 and app_name == 'unreal' and system == 'Windows':
+            now_dir = os.path.dirname(os.path.abspath(__file__))
+            packages = os.path.join(now_dir, 'packages', 'win')
+
+            sys.path.append(packages)
+
         if depart_confirm:
-            adapter = get_adapter(platform.system())
-            packages = get_rez_packages(sg, app_name, version, system, project)
+            # adapter = get_adapter(platform.system())
+            # packages = get_rez_packages(sg, app_name, version, system, project)
 
-            try:
-                import rez as _
-            except ImportError:
-                rez_path = adapter.get_rez_module_root()
-                if not rez_path:
-                    raise EnvironmentError('rez is not installed and could not be automatically found. Cannot continue.')
+            # try:
+            #     import rez as _
+            # except ImportError:
+            #     rez_path = adapter.get_rez_module_root()
+            #     if not rez_path:
+            #         raise EnvironmentError('rez is not installed and could not be automatically found. Cannot continue.')
                 
-                if sys.version_info.major == 3:
-                    rez_path = rez_path.decode('utf-8')
+            #     if sys.version_info.major == 3:
+            #         rez_path = rez_path.decode('utf-8')
                 
-                sys.path.append(rez_path)
+            #     sys.path.append(rez_path)
             
-            from rez import resolved_context
+            # from rez import resolved_context
 
-            if not packages or app_name == 'unreal':
-                self.logger.debug('No rez packages were found. The default boot, instead.')
-                
-                if app_name == 'unreal':
-                    fbx_module_path = os.path.join(
-                        os.getenv('APPDATA'),
-                        'Shotgun',
-                        'bundle_cache', 
-                        'gitbranch',
-                        'tk-config.git',
-                        'b09b82d',  
-                        'hooks',
-                        'packages',
-                        'win'
-                    )
-                    
-                    self.logger.info("==================== FBX MODULE SETUP ====================")
-                    self.logger.info(f"Checking FBX path: {fbx_module_path}")
-                    self.logger.info(f"FBX path exists: {os.path.exists(fbx_module_path)}")
-                    
-                    if os.path.exists(fbx_module_path):
-                        self.logger.info(f"Adding FBX module path: {fbx_module_path}")
-                        sys.path.append(fbx_module_path)
-                        os.environ['PYTHONPATH'] = fbx_module_path + os.pathsep + os.environ.get('PYTHONPATH', '')
-                    else:
-                        self.logger.warning(f"FBX module path does not exist: {fbx_module_path}")
-                    
-                    self.logger.info("==============================================")                
-                self.logger.debug('No rez packages were found. The default boot, instead.')
-                command = adapter.get_command(app_path, app_args)
-                return_code = os.system(command)
-                return {'command': command, 'return_code': return_code}
+            # if not packages or app_name == 'unreal':
+            #     if not packages:
+            #         self.logger.debug('No rez packages were found. The default boot, instead.')
+            #     command = adapter.get_command(app_path, app_args)
+            #     return_code = os.system(command)
+            #     return {'command': command, 'return_code': return_code}
             
-            context = resolved_context.ResolvedContext(packages)
-            return adapter.execute(context, app_args, app_name)
+            # context = resolved_context.ResolvedContext(packages)
+            # return adapter.execute(context, app_args, app_name)
 
-        else:
-            if tank.util.is_linux():
-                # on linux, we just run the executable directly
-                cmd = "%s %s &" % (app_path, app_args)
+        # else:
+            # if tank.util.is_linux():
+            #     # on linux, we just run the executable directly
+            #     cmd = "%s %s &" % (app_path, app_args)
 
-            elif tank.util.is_macos():
-                # If we're on OS X, then we have two possibilities: we can be asked
-                # to launch an application bundle using the "open" command, or we
-                # might have been given an executable that we need to treat like
-                # any other Unix-style command. The best way we have to know whether
-                # we're in one situation or the other is to check the app path we're
-                # being asked to launch; if it's a .app, we use the "open" command,
-                # and if it's not then we treat it like a typical, Unix executable.
-                if app_path.endswith(".app"):
-                    # The -n flag tells the OS to launch a new instance even if one is
-                    # already running. The -a flag specifies that the path is an
-                    # application and supports both the app bundle form or the full
-                    # executable form.
-                    cmd = 'open -n -a "%s"' % (app_path)
-                    if app_args:
-                        cmd += " --args %s" % app_args
-                else:
-                    cmd = "%s %s &" % (app_path, app_args)
+            # elif tank.util.is_macos():
+            #     # If we're on OS X, then we have two possibilities: we can be asked
+            #     # to launch an application bundle using the "open" command, or we
+            #     # might have been given an executable that we need to treat like
+            #     # any other Unix-style command. The best way we have to know whether
+            #     # we're in one situation or the other is to check the app path we're
+            #     # being asked to launch; if it's a .app, we use the "open" command,
+            #     # and if it's not then we treat it like a typical, Unix executable.
+            #     if app_path.endswith(".app"):
+            #         # The -n flag tells the OS to launch a new instance even if one is
+            #         # already running. The -a flag specifies that the path is an
+            #         # application and supports both the app bundle form or the full
+            #         # executable form.
+            #         cmd = 'open -n -a "%s"' % (app_path)
+            #         if app_args:
+            #             cmd += " --args %s" % app_args
+            #     else:
+            #         cmd = "%s %s &" % (app_path, app_args)
 
-            else:
+            # else:
                 # on windows, we run the start command in order to avoid
                 # any command shells popping up as part of the application launch.
-                cmd = 'start /B "App" "%s" %s' % (app_path, app_args)
+            cmd = 'start /B "App" "%s" %s' % (app_path, app_args)
 
             # run the command to launch the app
             exit_code = os.system(cmd)
@@ -160,60 +141,60 @@ class AppLaunch(tank.Hook):
             return {"command": cmd, "return_code": exit_code}
 
 
-def get_rez_packages(sg, app_name, version, system, project):
+# def get_rez_packages(sg, app_name, version, system, project):
     
-    if system == 'Linux':
-        filter_dict = [['code','is',app_name.title()+" "+version],
-                       ['projects','in',project]
-                      ]
-        packages = sg.find("Software",filter_dict,['sg_rez'])
-        if packages : 
-            packages =  packages[0]['sg_rez']
-        else:
-            filter_dict = [['code','is',app_name.title()+" "+version],
-                        ['projects','is',None] ]
-            packages = sg.find("Software",filter_dict,['sg_rez'])
-            if packages:
-                packages =  packages[0]['sg_rez']
+#     if system == 'Linux':
+#         filter_dict = [['code','is',app_name.title()+" "+version],
+#                        ['projects','in',project]
+#                       ]
+#         packages = sg.find("Software",filter_dict,['sg_rez'])
+#         if packages : 
+#             packages =  packages[0]['sg_rez']
+#         else:
+#             filter_dict = [['code','is',app_name.title()+" "+version],
+#                         ['projects','is',None] ]
+#             packages = sg.find("Software",filter_dict,['sg_rez'])
+#             if packages:
+#                 packages =  packages[0]['sg_rez']
 
-    else:
-        filter_dict = [['code','is',app_name.title()+" "+version],
-                       ['projects','in',project]
-                      ]
-        packages = sg.find("Software",filter_dict,['sg_win_rez'])
-        if packages : 
-            packages =  packages[0]['sg_win_rez']
-        else:
-            filter_dict = [['code','is',app_name.title()+" "+version],
-                        ['projects','is',None] ]
-            packages = sg.find("Software",filter_dict,['sg_win_rez'])
-            if packages:
-                packages =  packages[0]['sg_win_rez']
+#     else:
+#         filter_dict = [['code','is',app_name.title()+" "+version],
+#                        ['projects','in',project]
+#                       ]
+#         packages = sg.find("Software",filter_dict,['sg_win_rez'])
+#         if packages : 
+#             packages =  packages[0]['sg_win_rez']
+#         else:
+#             filter_dict = [['code','is',app_name.title()+" "+version],
+#                         ['projects','is',None] ]
+#             packages = sg.find("Software",filter_dict,['sg_win_rez'])
+#             if packages:
+#                 packages =  packages[0]['sg_win_rez']
 
-    if packages:
-        packages = [ x for x in packages.split(",")] 
-    else:
-        packages = None
+#     if packages:
+#         packages = [ x for x in packages.split(",")] 
+#     else:
+#         packages = None
         
-    return packages
+#     return packages
 
 
 
-def get_adapter(system=''):
-    if not system:
-        system = platform.system()
+# def get_adapter(system=''):
+#     if not system:
+#         system = platform.system()
     
-    options = {
-        'Linux' : LinuxAdapter,
-        'Windows' : WindowsAdapter
-        }
+#     options = {
+#         'Linux' : LinuxAdapter,
+#         'Windows' : WindowsAdapter
+#         }
 
-    try :
-        return options[system]
+#     try :
+#         return options[system]
 
-    except KeyError:
-        raise NotImplementedError('system "{system}" is currently unsupported. Options were, "{options}"'
-                                  ''.format(system=system, options=list(options)))
+#     except KeyError:
+#         raise NotImplementedError('system "{system}" is currently unsupported. Options were, "{options}"'
+#                                   ''.format(system=system, options=list(options)))
     
 
 class BaseAdapter:
