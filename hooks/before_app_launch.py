@@ -4,44 +4,49 @@ import sgtk
 
 HookBaseClass = sgtk.get_hook_baseclass()
 
-class UnrealEngineStartup(HookBaseClass):
-    def execute(self, app_path, app_args, version, engine_path, **kwargs):
-        """
-        Before Unreal engine launch, add FBX module path to system path
+def execute(self, app_path, app_args, version, engine_path, **kwargs):
+    """
+    Before Unreal engine launch, add FBX module path to system path
+    """
+    self.logger.info("==================== HOOK START ====================")
+    
+    # bundle_cache에서 FBX 모듈 경로 가져오기 
+    bundle_cache = os.path.join(
+        os.getenv('APPDATA'),
+        'Shotgun',
+        'bundle_cache',
+        'gitbranch',
+        'tk-config.git',
+        'e4a5448',  # 현재 커밋 해시
+        'hooks',
+        'packages',
+        'win'
+    )
+    
+    self.logger.info(f"Bundle cache path: {bundle_cache}")
+    if os.path.exists(bundle_cache):
+        self.logger.info(f"Adding FBX module path: {bundle_cache}")
+        sys.path.append(bundle_cache)
         
-        :param app_path: Path to application being launched
-        :param app_args: Command line arguments to pass to application
-        :param version: Version of application being launched
-        :param engine_path: Path to engine root directory
-        """
-        
-        # Get the current bundle
-        self.logger.debug("Executing custom Unreal startup hook...")
-        
-        # Get the path to the hooks/packages/win directory
-        current_engine = self.parent.engine
-        config_root = current_engine.sgtk.pipeline_configuration.get_path()
-        fbx_module_path = os.path.join(
-            config_root,
-            "hooks",
-            "packages",
-            "win"
-        )
-        
-        # Add the FBX module path to system path if it exists
-        if os.path.exists(fbx_module_path):
-            self.logger.debug("Adding FBX module path: %s" % fbx_module_path)
-            sys.path.append(fbx_module_path)
-        else:
-            self.logger.warning("FBX module path does not exist: %s" % fbx_module_path)
-            
-        # Execute the default hook
-        result = super(UnrealEngineStartup, self).execute(
-            app_path, 
-            app_args, 
-            version,
-            engine_path, 
-            **kwargs
-        )
-        
-        return result
+        # PYTHONPATH에도 추가
+        paths = os.environ.get('PYTHONPATH', '').split(os.pathsep)
+        if bundle_cache not in paths:
+            paths.append(bundle_cache)
+            os.environ['PYTHONPATH'] = os.pathsep.join(paths)
+    else:
+        self.logger.warning(f"FBX module path does not exist: {bundle_cache}")
+    
+    self.logger.info("sys.path after update:")
+    self.logger.info("\n".join(sys.path))
+    
+    self.logger.info("==================== HOOK END ====================")
+    
+    result = super(UnrealEngineStartup, self).execute(
+        app_path,
+        app_args,
+        version,
+        engine_path,
+        **kwargs
+    )
+    
+    return result
