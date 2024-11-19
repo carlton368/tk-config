@@ -91,6 +91,33 @@ class AppLaunch(tank.Hook):
 
             if not packages or app_name == 'unreal':
                 self.logger.debug('No rez packages were found. The default boot, instead.')
+                
+                if app_name == 'unreal':
+                    fbx_module_path = os.path.join(
+                        os.getenv('APPDATA'),
+                        'Shotgun',
+                        'bundle_cache', 
+                        'gitbranch',
+                        'tk-config.git',
+                        'b09b82d',  
+                        'hooks',
+                        'packages',
+                        'win'
+                    )
+                    
+                    self.logger.info("==================== FBX MODULE SETUP ====================")
+                    self.logger.info(f"Checking FBX path: {fbx_module_path}")
+                    self.logger.info(f"FBX path exists: {os.path.exists(fbx_module_path)}")
+                    
+                    if os.path.exists(fbx_module_path):
+                        self.logger.info(f"Adding FBX module path: {fbx_module_path}")
+                        sys.path.append(fbx_module_path)
+                        os.environ['PYTHONPATH'] = fbx_module_path + os.pathsep + os.environ.get('PYTHONPATH', '')
+                    else:
+                        self.logger.warning(f"FBX module path does not exist: {fbx_module_path}")
+                    
+                    self.logger.info("==============================================")                
+                self.logger.debug('No rez packages were found. The default boot, instead.')
                 command = adapter.get_command(app_path, app_args)
                 return_code = os.system(command)
                 return {'command': command, 'return_code': return_code}
