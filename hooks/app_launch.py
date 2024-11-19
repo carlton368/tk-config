@@ -133,8 +133,10 @@ class AppLaunch(tank.Hook):
             # else:
                 # on windows, we run the start command in order to avoid
                 # any command shells popping up as part of the application launch.
+            os.environ['WONJIN_BEFORE_LAUNCH'] = os.environ['PYTHONPATH']
+            self.parent.log_debug("WONJIN_BEFORE_LAUNCH: %s" % os.environ['WONJIN_BEFORE_LAUNCH'])
             cmd = 'start /B "App" "%s" %s' % (app_path, app_args)
-
+            self.parent.log_debug("Command to execute  : %s" % cmd)
             # run the command to launch the app
             exit_code = os.system(cmd)
 
