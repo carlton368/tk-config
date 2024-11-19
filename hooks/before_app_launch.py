@@ -36,6 +36,7 @@ class BeforeAppLaunch(HookBaseClass):
             self.parent.log_debug("Updated Python paths:")
             self.parent.log_debug("PYTHONPATH: %s" % os.environ['PYTHONPATH'])
             self.parent.log_debug("UE_PYTHONPATH: %s" % os.environ['UE_PYTHONPATH'])
+            self.parent.log_debug("WONJIN_BEFORE_LAUNCH2: %s" % os.environ['WONJIN_BEFORE_LAUNCH2'])
             self.parent.log_debug("sys.path: %s" % sys.path)
 
         # 상위 클래스의 execute 실행
