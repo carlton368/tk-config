@@ -153,7 +153,7 @@ class AppLaunch(tank.Hook):
             else:
                 os.environ['UE_PYTHONPATH'] = new_paths
             
-            if 'WONJIN_BEFORE_LAUNCH' in os.environ:
+            if 'WONJIN_LAUNCH' in os.environ:
                 os.environ['WONJIN_LAUNCH'] += os.pathsep + 'WONJIN_LAUNCH'
             else:
                 os.environ['WONJIN_LAUNCH'] = 'WONJIN_LAUNCH'
