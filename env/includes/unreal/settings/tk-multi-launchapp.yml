@@ -4,11 +4,7 @@ includes:
 settings.tk-multi-launchapp.unreal:
   engine: tk-unreal
   icon: "{target_engine}/icon_unreal_256.png"
-  linux_path: "@path.linux.unreal"
-  mac_path: "@path.mac.unreal"
-  windows_path: "@path.windows.unreal"
-  menu_name: Unreal
-  location: "@apps.tk-multi-launchapp.location"
+  menu_name: Unreal5
   hook_before_app_launch: '{config}/before_app_launch.py'  # Added this line
   hook_app_launch: "{config}/app_launch.py"
   hook_before_register_command: "{config}/tk-multi-launchapp/before_register_command.py"
@@ -27,7 +23,6 @@ settings.tk-multi-launchapp.unreal:
     tk-multi-pythonconsole:
       location: "@apps.tk-multi-pythonconsole.location"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.unreal"
-  location: "@tk-unreal.location"
   menu_favourites: []
   run_at_startup:
   - {app_instance: tk-multi-shotgunpanel, name: ''}
