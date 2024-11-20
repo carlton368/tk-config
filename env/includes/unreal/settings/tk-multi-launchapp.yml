@@ -1,5 +1,6 @@
 includes:
 - ../../app_locations.yml
+- ../../software_paths.yml
 
 settings.tk-multi-launchapp.unreal:
   engine: tk-unreal
