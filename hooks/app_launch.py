@@ -133,8 +133,15 @@ class AppLaunch(tank.Hook):
             # else:
                 # on windows, we run the start command in order to avoid
                 # any command shells popping up as part of the application launch.
-            os.environ['WONJIN_LAUNCH'] = "C:/Users/lee/AppData/Local"
+            os.environ['PYTHONPATH'] = 'PYTHONPATH_APP_LAUNCH'
+            os.environ['UE_PYTHONPATH'] = 'UE_PYTHONPATH_APP_LAUNCH'
+            os.environ['WONJIN_LAUNCH'] = 'WONJIN_LAUNCH'
+            self.parent.log_debug("WONJIN_APP_LAUNCH Updated Python paths:")
+            self.parent.log_debug("PYTHONPATH: %s" % os.environ['PYTHONPATH'])
+            self.parent.log_debug("UE_PYTHONPATH: %s" % os.environ['UE_PYTHONPATH'])
             self.parent.log_debug("WONJIN_LAUNCH: %s" % os.environ['WONJIN_LAUNCH'])
+            self.parent.log_debug("WONJIN_BEFORE_LAUNCH2: %s" % os.environ['WONJIN_BEFORE_LAUNCH2'])
+            self.parent.log_debug("sys.path: %s" % sys.path)
             cmd = 'start /B "App" "%s" %s' % (app_path, app_args)
             self.parent.log_debug("Command to execute  : %s" % cmd)
             # run the command to launch the app
