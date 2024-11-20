@@ -162,7 +162,7 @@ class AppLaunch(tank.Hook):
             self.parent.log_debug("PYTHONPATH: %s" % os.environ['PYTHONPATH'])
             self.parent.log_debug("UE_PYTHONPATH: %s" % os.environ['UE_PYTHONPATH'])
             self.parent.log_debug("WONJIN_LAUNCH: %s" % os.environ['WONJIN_LAUNCH'])
-            self.parent.log_debug("WONJIN_BEFORE_LAUNCH: %s" % os.environ['WONJIN_BEFORE_LAUNCH'])
+            #self.parent.log_debug("WONJIN_BEFORE_LAUNCH: %s" % os.environ['WONJIN_BEFORE_LAUNCH'])
             self.parent.log_debug("sys.path: %s" % sys.path)
             cmd = 'start /B "App" "%s" %s' % (app_path, app_args)
             self.parent.log_debug("Command to execute  : %s" % cmd)
