@@ -1,0 +1,9 @@
+includes:
+- ../../app_locations.yml
+
+settings.tk-multi-launchapp.unreal:
+  use_software_entity: true
+  hook_before_register_command: "{config}/tk-multi-launchapp/before_register_command.py"
+  hook_before_app_launch: '{config}/before_app_launch.py'  # Added this line
+  hook_app_launch: "{config}/app_launch.py"
+  location: "@apps.tk-multi-launchapp.location"
