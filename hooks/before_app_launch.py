@@ -5,38 +5,43 @@ import sgtk
 HookBaseClass = sgtk.get_hook_baseclass()
 
 class BeforeAppLaunch(HookBaseClass):
+
     def execute(self, app_path, app_args, version, engine_name, software_entity=None, **kwargs):
         """
         언리얼 엔진 시작 전에 Python 경로를 설정합니다.
         """
         if engine_name == "tk-unreal":
-            # 외부 Python 모듈 경로 설정
+            # 추가할 경로들
             external_paths = [
-                "C:/Python/Lib/site-packages",  # pip로 설치한 패키지들
-                "C:/Users/admin/AppData/Local/Programs/Python/Python39/Lib/site-packages",  # 추가 파이썬 패키지
-                # 필요한 다른 경로들 추가
+                "external_path1",
+                "external_path2"
             ]
-
-            # 현재 PYTHONPATH 가져오기
-            current_pythonpath = os.environ.get('PYTHONPATH', '').split(os.pathsep)
             
-            # 새로운 경로 추가
-            for path in external_paths:
-                if os.path.exists(path) and path not in current_pythonpath:
-                    current_pythonpath.append(path)
-                    if path not in sys.path:
-                        sys.path.append(path)
+            # 새로운 경로들을 세미콜론으로 결합
+            new_paths = os.pathsep.join(external_paths)
             
-            # 환경 변수 업데이트
-            os.environ['PYTHONPATH'] = 'PYTHONPATH_BEFORE_APP_LAUNCH'
-            os.environ['UE_PYTHONPATH'] = 'UE_PYTHONPATH_BEFORE_APP_LAUNCH'
-            os.environ['WONJIN_BEFORE_LAUNCH2'] = 'WONJIN_BEFORE_LAUNCH2'
+            # PYTHONPATH 설정
+            if 'PYTHONPATH' in os.environ:
+                os.environ['PYTHONPATH'] += os.pathsep + new_paths
+            else:
+                os.environ['PYTHONPATH'] = new_paths
+                
+            # UE_PYTHONPATH 설정
+            if 'UE_PYTHONPATH' in os.environ:
+                os.environ['UE_PYTHONPATH'] += os.pathsep + new_paths
+            else:
+                os.environ['UE_PYTHONPATH'] = new_paths
+            
+            if 'WONJIN_BEFORE_LAUNCH' in os.environ:
+                os.environ['WONJIN_BEFORE_LAUNCH'] += os.pathsep + 'WONJIN_BEFORE_LAUNCH'
+            else:
+                os.environ['WONJIN_BEFORE_LAUNCH'] = 'WONJIN_BEFORE_LAUNCH'
 
             # 로깅
             self.parent.log_debug("WONJIN_BEFORE_APP_LAUNCH Updated Python paths:")
             self.parent.log_debug("PYTHONPATH: %s" % os.environ['PYTHONPATH'])
             self.parent.log_debug("UE_PYTHONPATH: %s" % os.environ['UE_PYTHONPATH'])
-            self.parent.log_debug("WONJIN_BEFORE_LAUNCH2: %s" % os.environ['WONJIN_BEFORE_LAUNCH2'])
+            self.parent.log_debug("WONJIN_BEFORE_LAUNCH: %s" % os.environ['WONJIN_BEFORE_LAUNCH2'])
             self.parent.log_debug("sys.path: %s" % sys.path)
 
         # 상위 클래스의 execute 실행
