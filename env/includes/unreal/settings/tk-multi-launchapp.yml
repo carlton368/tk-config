@@ -2,8 +2,37 @@ includes:
 - ../../app_locations.yml
 
 settings.tk-multi-launchapp.unreal:
-  use_software_entity: true
-  hook_before_register_command: "{config}/tk-multi-launchapp/before_register_command.py"
+  engine: tk-unreal
+  icon: "{target_engine}/icon_unreal_256.png"
+  linux_path: "@path.linux.unreal"
+  mac_path: "@path.mac.unreal"
+  windows_path: "@path.windows.unreal"
+  menu_name: Unreal
+  location: "@apps.tk-multi-launchapp.location"
   hook_before_app_launch: '{config}/before_app_launch.py'  # Added this line
+  hook_app_launch: "{config}/app_launch.py"
+  hook_before_register_command: "{config}/tk-multi-launchapp/before_register_command.py"
+  use_software_entity: true
+  shotgun:
+    use_software_entity: true
+    skip_engine_instances: ["tk-nukestudio"]
+    hook_before_register_command: "{config}/tk-multi-launchapp/before_register_command.py"
+    hook_app_launch: "{config}/app_launch.py"
+    location: "@apps.tk-multi-launchapp.location"
+  apps:
+    tk-multi-about:
+      location: "@apps.tk-multi-about.location"
+    tk-multi-loader2: "@settings.tk-multi-loader2.unreal"
+    tk-multi-publish2: "@settings.tk-multi-publish2.unreal.project"
+    tk-multi-pythonconsole:
+      location: "@apps.tk-multi-pythonconsole.location"
+    tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.unreal"
+  location: "@tk-unreal.location"
+  menu_favourites: []
+  run_at_startup:
+  - {app_instance: tk-multi-shotgunpanel, name: ''}
+  launch_builtin_plugins: [basic]
+  automatic_context_switch: false
+  hook_before_register_command: "{config}/tk-multi-launchapp/before_register_command.py"
   hook_app_launch: "{config}/app_launch.py"
   location: "@apps.tk-multi-launchapp.location"

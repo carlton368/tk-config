@@ -14,13 +14,29 @@ includes:
 - ./tk-multi-shotgunpanel.yml
 
 ################################################################################
-
-
+# asset_step
+settings.tk-unreal.asset.step:
+  apps:
+    tk-multi-about:
+      location: "@apps.tk-multi-about.location"
+    tk-multi-launchapp: "@settings.tk-multi-launchapp.unreal"
+    tk-multi-loader2: "@settings.tk-multi-loader2.unreal"
+    tk-multi-publish2: "@settings.tk-multi-publish2.unreal.asset_step"
+    tk-multi-pythonconsole:
+      location: "@apps.tk-multi-pythonconsole.location"
+    #tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv" # This line was added
+    tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.unreal"
+  location: "@tk-unreal.location"
+  menu_favourites: []
+  run_at_startup: []
+  launch_builtin_plugins: [basic]
+  automatic_context_switch: false 
 # project
 settings.tk-unreal.project:
   apps:
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
+    tk-multi-launchapp: "@settings.tk-multi-launchapp.unreal"
     tk-multi-loader2: "@settings.tk-multi-loader2.unreal"
     tk-multi-publish2: "@settings.tk-multi-publish2.unreal.project"
     tk-multi-pythonconsole:
