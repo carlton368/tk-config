@@ -18,7 +18,7 @@ settings.tk-multi-launchapp.unreal:
   apps:
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-publish2: "@settings.tk-multi-publish2.unreal.project"
+    tk-multi-publish2: "@apps.tk-multi-publish2.location"
     tk-multi-pythonconsole:
       location: "@apps.tk-multi-pythonconsole.location"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.unreal"
