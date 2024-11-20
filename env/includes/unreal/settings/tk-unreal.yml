@@ -32,4 +32,3 @@ settings.tk-unreal.project:
   - {app_instance: tk-multi-shotgunpanel, name: ''}
   launch_builtin_plugins: [basic]
   automatic_context_switch: false
-  hook_before_app_launch: '{config}/hooks/before_app_launch.py'  # Added this line
