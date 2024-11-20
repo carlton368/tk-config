@@ -33,4 +33,4 @@ path.mac.rv: "/Applications/RV.app"
 path.windows.rv: C:\Program Files\Shotgun\RV-7.9.0\bin\rv.exe
 
 # unreal
-path.windows.unreal: C:\Program Files\Epic Games\UE_5.4A\Engine\Binaries\Win64\UnrealEditor.exe
+path.windows.unreal: C:\Program Files\Epic Games\UE_5.4\Engine\Binaries\Win64\UnrealEditor.exe
