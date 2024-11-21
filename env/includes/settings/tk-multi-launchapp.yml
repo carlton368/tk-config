@@ -13,7 +13,6 @@
 includes:
 - ../app_locations.yml
 - ../software_paths.yml
-- ../unreal/settings/tk-multi-launchapp.yml
 ################################################################################
 
 # auto discover DCCs for launch
