@@ -34,7 +34,7 @@ settings.tk-multi-launchapp.shotgun:
 
 ################################################################################
 
-settings.tk-multi-launchapp.unreal: "@settings.tk-multi-launchapp.unreal"
+#settings.tk-multi-launchapp.unreal: "@settings.tk-multi-launchapp.unreal"
 
 # app-specific launchapp configurations
 
