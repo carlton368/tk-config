@@ -68,15 +68,8 @@ class AppLaunch(tank.Hook):
 
         depart_confirm = False
 
-        if (depart['name'] == 'RND' and engine_name == 'tk-nuke') or depart['name'] in ['General']:
+        if (depart['name'] == 'RND' and engine_name == 'tk-nuke') or depart['name'] == 'General' and engine_name == 'tk-unreal':
             depart_confirm = True
-
-
-        if sys.version_info.major == 3 and app_name == 'unreal' and system == 'Windows':
-            now_dir = os.path.dirname(os.path.abspath(__file__))
-            packages = os.path.join(now_dir, 'packages', 'win')
-
-            sys.path.append(packages)
 
         if depart_confirm:
             # adapter = get_adapter(platform.system())
@@ -133,9 +126,10 @@ class AppLaunch(tank.Hook):
             # else:
                 # on windows, we run the start command in order to avoid
                 # any command shells popping up as part of the application launch.
+            fbx_packagas = os.path.join(os.path.dirname(__file__), "packages", "win")
             external_paths = [
                 "external_path3",
-                "external_path4"
+                fbx_packagas
             ]
             
             # 새로운 경로들을 세미콜론으로 결합
